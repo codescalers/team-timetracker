@@ -1,0 +1,10 @@
+{
+    "server": {
+        "addr": "0.0.0.0:8080",
+        "allowed_origins": ["*"]
+    },
+    "database": {
+        "driver": "sqlite",
+        "data_source": "timetracker.db"
+    }
+}
