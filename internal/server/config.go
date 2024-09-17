@@ -12,7 +12,6 @@ import (
 // ServerConfig holds server-related configurations
 type ServerConfig struct {
 	Addr string `json:"addr"`
-	// AllowedOrigins []string `json:"allowed_origins"`
 }
 
 // DatabaseConfig holds database-related configurations

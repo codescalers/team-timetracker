@@ -1,7 +1,6 @@
 {
     "server": {
-        "addr": "0.0.0.0:8080",
-        "allowed_origins": ["*"]
+        "addr": "0.0.0.0:8080"
     },
     "database": {
         "driver": "sqlite",
