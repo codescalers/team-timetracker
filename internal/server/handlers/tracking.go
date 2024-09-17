@@ -57,7 +57,8 @@ func (h *TrackingHandler) StartTracking(w http.ResponseWriter, r *http.Request) 
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(entry)
+	w.WriteHeader(http.StatusCreated)
+	_ = json.NewEncoder(w).Encode(entry)
 }
 
 // StopTrackingRequest represents the request payload for stopping tracking
@@ -104,5 +105,5 @@ func (h *TrackingHandler) StopTracking(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(entry)
+	_ = json.NewEncoder(w).Encode(entry)
 }

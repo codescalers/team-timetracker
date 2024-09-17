@@ -48,6 +48,9 @@ func LoadConfig(path string) (*Config, error) {
 	if err := json.Unmarshal(bytes, &cfg); err != nil {
 		return nil, fmt.Errorf("error parsing config file: %w", err)
 	}
-
+	if cfg.Database.Driver != "sqlite" {
+		return nil, fmt.Errorf("unsupported database driver: %s only sqlite is supported", cfg.Database.Driver)
+	}
+	//TODO: check if more to be added e.g valid filenames/paths.
 	return &cfg, nil
 }
