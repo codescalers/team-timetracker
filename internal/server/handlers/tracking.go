@@ -33,7 +33,7 @@ func (h *TrackingHandler) StartTracking(w http.ResponseWriter, r *http.Request) 
 	}
 
 	if strings.TrimSpace(req.Username) == "" || strings.TrimSpace(req.URL) == "" || strings.TrimSpace(req.Description) == "" {
-		http.Error(w, "Username and URL are required", http.StatusBadRequest)
+		http.Error(w, "Username, Description and URL are required", http.StatusBadRequest)
 		return
 	}
 
