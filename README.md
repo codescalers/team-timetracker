@@ -55,7 +55,7 @@ The client requires configuration either passed as `-config` flag or in `~/.conf
 #### Start time entry
 
 ```
-~> ./bin/timetracker start github.com/theissues/issue/142 "helllooo starting" 
+~> ./bin/timetracker-cli start github.com/theissues/issue/142 "helllooo starting" 
 Started tracking ID 9 for URL 'github.com/theissues/issue/142'.
 ```
 
@@ -65,7 +65,7 @@ It takes the URL as an argument and a description and returns you a tracking ID
 #### Stop time entry
 
 ```
-~> ./bin/timetracker stop github.com/theissues/issue/142   
+~> ./bin/timetracker-cli stop github.com/theissues/issue/142   
 
 Stopped tracking for URL 'github.com/theissues/issue/142'. Duration: 35 minutes.
 ```

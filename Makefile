@@ -1,5 +1,6 @@
 # Makefile for timetracker
-
+PWD := $(shell pwd)
+GOPATH := $(shell go env GOPATH)
 # Directories
 SERVER_DIR=cmd/server
 CLIENT_DIR=cmd/client
@@ -20,17 +21,21 @@ build: build-server build-client
 build-server:
 	@echo "Building server..."
 	@mkdir -p bin
-	go build -o $(SERVER_BIN) $(SERVER_DIR)/main.go
+	CGO_ENABLED=1 go build -o $(SERVER_BIN) $(SERVER_DIR)/main.go
 
 # Build client binary
 build-client:
 	@echo "Building client..."
 	@mkdir -p bin
-	go build -o $(CLIENT_BIN) $(CLIENT_DIR)/main.go
+	CGO_ENABLED=1 go build -o $(CLIENT_BIN) $(CLIENT_DIR)/main.go
 
 # Lint code by formatting and vetting
-lint: 
-	golangci-lint run -c ./.golangci.yml 
+	
+lint:
+	@echo "Installing golangci-lint" && go get github.com/golangci/golangci-lint/cmd/golangci-lint && go install github.com/golangci/golangci-lint/cmd/golangci-lint
+	go mod tidy
+	@echo "Running $@"
+	${GOPATH}/bin/golangci-lint run -c .golangci.yml
 
 # Run tests
 test:
