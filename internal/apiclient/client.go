@@ -139,12 +139,12 @@ func (api *APIClient) GetEntries(username, url, format string) ([]byte, error) {
 // TimeEntry represents a time tracking entry
 type TimeEntry struct {
 	ID          uint    `json:"id"`
-	Username    string  `json:"username"`
-	URL         string  `json:"url"`
-	Description string  `json:"description"`
-	StartTime   string  `json:"start_time"`
-	EndTime     *string `json:"end_time,omitempty"`
-	Duration    int64   `json:"duration"` // in minutes
-	CreatedAt   string  `json:"created_at"`
-	UpdatedAt   string  `json:"updated_at"`
+	Username    string  `json:"username" csv:"username"`
+	URL         string  `json:"url" csv:"url"`
+	Description string  `json:"description" csv:"description"`
+	StartTime   string  `json:"start_time" csv:"start_time"`
+	EndTime     *string `json:"end_time,omitempty" csv:"end_time"`
+	Duration    int64   `json:"duration" csv:"duration"` // in minutes
+	CreatedAt   string  `json:"created_at" csv:"created_at"`
+	UpdatedAt   string  `json:"updated_at" csv:"updated_at"`
 }
