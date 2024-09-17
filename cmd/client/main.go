@@ -28,7 +28,7 @@ func main() {
 		cfgPath = apiclient.DefaultConfigPath()
 	}
 
-	// Check if config file existss
+	// Check if config file exists
 	if _, err := os.Stat(cfgPath); os.IsNotExist(err) {
 		log.Fatalf("Configuration file not found: %s\n", cfgPath)
 	}

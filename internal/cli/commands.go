@@ -54,7 +54,7 @@ func EntriesCommand(cfg *apiclient.ClientConfig, api *apiclient.APIClient, forma
 
 	data, err := api.GetEntries(username, url, format)
 	if err != nil {
-		return fmt.Errorf("Error retrieving entries: %w\n", err)
+		return fmt.Errorf("error retrieving entries: %w", err)
 	}
 
 	if strings.ToLower(format) == "csv" {
@@ -66,7 +66,7 @@ func EntriesCommand(cfg *apiclient.ClientConfig, api *apiclient.APIClient, forma
 	// Assume JSON format
 	var entries []apiclient.TimeEntry
 	if err := json.Unmarshal(data, &entries); err != nil {
-		return fmt.Errorf("Error parsing JSON response: %w", err)
+		return fmt.Errorf("error parsing JSON response: %w", err)
 	}
 
 	if len(entries) == 0 {
