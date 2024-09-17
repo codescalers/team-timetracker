@@ -28,18 +28,9 @@ build-client:
 	@mkdir -p bin
 	go build -o $(CLIENT_BIN) $(CLIENT_DIR)/main.go
 
-# Format code using go fmt
-fmt:
-	@echo "Formatting code..."
-	go fmt ./...
-
-# Vet code using go vet
-vet:
-	@echo "Running go vet..."
-	go vet ./...
-
 # Lint code by formatting and vetting
-lint: fmt vet
+lint: 
+	golangci-lint run -c ./.golangci.yml 
 
 # Run tests
 test:
