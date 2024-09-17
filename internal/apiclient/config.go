@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -39,7 +40,7 @@ func LoadConfig(path string) (*ClientConfig, error) {
 		return nil, fmt.Errorf("error parsing config file: %w", err)
 	}
 
-	if strings.TrimSpace(cfg.Username) == "" || strings.TrimSpace(cfg.BackendURL) == "" {
+	if strings.TrimSpace(cfg.Username) == "" || !isValidURL(cfg.BackendURL) {
 		return nil, fmt.Errorf("username and backend_url must be set in the config file")
 	}
 
@@ -53,4 +54,28 @@ func DefaultConfigPath() string {
 		return ""
 	}
 	return filepath.Join(homeDir, ".config", "team-timetracker.json")
+}
+
+// isValidURL checks if a given URL string is valid and matches the expected
+// requirements (e.g. scheme, host).
+func isValidURL(theURL string) bool {
+	if strings.TrimSpace(theURL) == "" {
+		return false
+	}
+
+	u, err := url.Parse(theURL)
+	if err != nil {
+		return false
+	}
+
+	// Additional checks for specific requirements (optional)
+	if u.Scheme != "http" && u.Scheme != "https" {
+		return false
+	}
+
+	if u.Host == "" {
+		return false
+	}
+
+	return true
 }

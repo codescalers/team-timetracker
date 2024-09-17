@@ -43,7 +43,7 @@ func (api *APIClient) StartTracking(username, url, description string) (*TimeEnt
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusCreated {
 		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf("start request failed: %s", string(body))
 	}

@@ -30,13 +30,13 @@ func main() {
 
 	// Check if config file exists
 	if _, err := os.Stat(cfgPath); os.IsNotExist(err) {
-		log.Fatalf("Configuration file not found: %s\n", cfgPath)
+		log.Fatalf("configuration file not found: %s\n", cfgPath)
 	}
 
 	// Load configuration
 	cfg, err := apiclient.LoadConfig(cfgPath)
 	if err != nil {
-		log.Fatalf("Error loading config: %s", err)
+		log.Fatalf("error loading config: %s", err)
 	}
 
 	api := apiclient.NewAPIClient(cfg.BackendURL)
@@ -46,7 +46,7 @@ func main() {
 
 	// Ensure at least one subcommand is provided
 	if len(args) < 1 {
-		fmt.Println("Error: No subcommand provided.")
+		fmt.Println("error: No subcommand provided.")
 		printUsage()
 		os.Exit(1)
 	}
