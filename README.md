@@ -203,3 +203,17 @@ End Time: Sun, 15 Sep 2024 22:08:14 EEST
 Duration: 3 minutes
 ------------------------------
 ```
+
+## Web UI
+
+### HomePage
+
+![home](./img/timetracker_home.png)
+
+### Start a time entry
+
+![start_time](./img/timetracker_start.png)
+
+### Stop a time entry
+
+![stop_time](./img/timetracker_stop.png)

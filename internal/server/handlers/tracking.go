@@ -107,3 +107,39 @@ func (h *TrackingHandler) StopTracking(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	_ = json.NewEncoder(w).Encode(entry)
 }
+
+// GetStatus handles the /api/status endpoint
+func (h *TrackingHandler) GetStatus(w http.ResponseWriter, r *http.Request) {
+	username := r.URL.Query().Get("username")
+	if username == "" {
+		http.Error(w, "Username is required", http.StatusBadRequest)
+		return
+	}
+
+	var activeEntry models.TimeEntry
+	if err := h.DB.Where("username = ? AND end_time IS NULL", username).First(&activeEntry).Error; err != nil {
+		// No active entry
+		status := struct {
+			Status string `json:"status"`
+		}{
+			Status: "idle",
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(status)
+		return
+	}
+
+	// Active entry exists
+	status := struct {
+		Status string `json:"status"`
+		ID     uint   `json:"id"`
+		URL    string `json:"url"`
+	}{
+		Status: "active",
+		ID:     activeEntry.ID,
+		URL:    activeEntry.URL,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(status)
+}
